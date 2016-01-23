@@ -18,7 +18,17 @@
 		"commands": [{
 			"command": "extension.sayHello",
 			"title": "Hello World"
-		}]
+		}],
+        "jsonValidation": [
+            {
+                "fileMatch": "*.uproject",
+                "url": "./res/uproject_scheme.json"
+            },
+            {
+                "fileMatch": "*.uplugin",
+                "url": "./res/uplugin_scheme.json"
+            }
+        ]
 	},
 	"scripts": {
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",

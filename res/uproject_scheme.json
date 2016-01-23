@@ -1,0 +1,136 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "Category": {
+            "type": "string",
+            "description": "プロジェクトブラウザの下に表示されるカテゴリします"
+        },
+        "Description": {
+            "type": "string",
+            "description": "プロジェクトブラウザに表示する説明します"
+        },
+        "EngineAssociation": {
+            "type": "string",
+            "description": "起動するエンジンのバージョン"
+        },
+        "EpicSampleNameHash": {
+            "type": "integer",
+            "description": "プロジェクトは、サンプルからフォークした場合に使用されるハッシュは決定します"
+        },
+        "FileVersion": {
+            "description": "Descriptor version number."
+        },
+        "Modules": {
+            "type": "array",
+            "description": "ソースコード (およびバイナリ) を含むプラグインの場合、これは起動時にロードすべきモジュールのリストになります。詳細は以下をご覧ください。",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "default": "",
+                        "description": "プラグインと合わせてロードされるプラグイン モジュールの一意の名前。"
+                    },
+                    "Type": {
+                        "enum": [
+                            "Runtime",
+                            "RuntimeNoCommandlet",
+                            "Developer",
+                            "Editor",
+                            "EditorNoCommandlet",
+                            "Program"
+                        ],
+                        "type": "string",
+                        "default": "",
+                        "description": "モジュールのタイプを設定します。"
+                    },
+                    "LoadingPhase": {
+                        "enum": [
+                            "Default",
+                            "PreDefault",
+                            "PostConfigInit"
+                        ],
+                        "type": "string",
+                        "default": "",
+                        "description": "指定すると、起動時にプラグインをいつロードするかを制御します。これは通常は必要としない高度なオプションです。"
+                    },
+                    "AdditionalDependencies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of additional dependencies for building this module."
+                    },
+                    "BlacklistPlatforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of disallowed platforms"
+                    },
+                    "WhitelistPlatforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of allowed platforms"
+                    }
+                },
+                "required": [
+                    "Name",
+                    "Type"
+                ]
+            }
+        },
+        "Plugins": {
+            "type": "array",
+            "description": "List of plugins for this project (may be enabled/disabled)",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "bEnabled": {
+                        "type": "boolean",
+                        "description": "Whether it should be enabled by default"
+                    },
+                    "BlacklistPlatforms": {
+                        "type": "array",
+                        "description": "If enabled, list of platforms for which the plugin should be disabled.",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "Description": {
+                        "type": "string",
+                        "description": "Description of the plugin for users that do not have it installed."
+                    },
+                    "MarketplaceURL": {
+                        "type": "string",
+                        "description": "URL for this plugin on the marketplace, if the user doesn't have it installed."
+                    },
+                    "Name": {
+                        "type": "string",
+                        "description": "Name of the plugin"
+                    },
+                    "WhitelistPlatforms": {
+                        "type": "array",
+                        "description": "If enabled, list of platforms for which the plugin should be enabled (or all platforms if blank).",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "TargetPlatforms": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "TargetPlatforms	Array of platforms that this project is targeting"
+        }
+    },
+    "required": [
+        "FileVersion"
+    ]
+}

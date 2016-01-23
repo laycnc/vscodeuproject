@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "FileVersion": {
+            "type": "integer",
+            "default": 3,
+            "minimum": 0,
+            "description": "プラグインの記述子ファイル自体のバージョン。新規機能がプラグインに追加されると、後方互換性のために使用されます。通常、これは使用しているエンジンのバージョンで認められる最新バージョンに設定します。"
+        },
+        "Version": {
+            "type": "integer",
+            "default": 0,
+            "description": "プラグインのこのビルドの最新バージョン番号。この値は、将来的なバージョンで常に増えます。バージョン番号は必ずしもエンド ユーザー向けに表示されません。"
+        },
+        "VersionName": {
+            "type": "string",
+            "default": "1.0.0",
+            "description": "エディタ UI で表示されるプラグインのバージョン。これはバージョン チェックでは決して使用されず、好みに応じてどの形式でも可能です。"
+        },
+        "PackageFileUE4Version": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "description": "プラグインにコンテンツをロードするために必要なパッケージ ファイルの最低バージョン。"
+        },
+        "PackageFileLicenseeUE4Version": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "description": "プラグインにコンテンツをロードするために必要なセカンダリの最低バージョンのパッケージ ファイル。"
+        },
+        "FriendlyName": {
+            "type": "string",
+            "default": "",
+            "description": "エディタ UI に表示されるプラグイン名。指定しないと、 .uplugin ファイル名になります。"
+        },
+        "Description": {
+            "type": "string",
+            "default": "",
+            "description": "プラグインの用途を説明するテキストのパラグラフ。エディタのプラグイン ウィンドウに表示されます。"
+        },
+        "Category": {
+            "type": "string",
+            "default": "",
+            "description": "これはドットで区切られたパスの特殊な文字列で、プラグインをエディタ UI のカテゴリに割り当てることができます。純粋に整理目的に限ったものです。"
+        },
+        "CreatedBy": {
+            "type": "string",
+            "default": "プラグインを作成した個人名または企業名。これはプラグイン UI や他の場所に表示される場合があります。"
+        },
+        "CanContainContent": {
+            "type": "boolean",
+            "default": false,
+            "description": "指定して、true に設定すると、プラグインのコンテンツ サポートを有効にします。デフォルト設定は false です。詳細は プラグインのコンテンツ をご覧ください。"
+        },
+        "Modules": {
+            "type": "array",
+            "description": "ソースコード (およびバイナリ) を含むプラグインの場合、これは起動時にロードすべきモジュールのリストになります。詳細は以下をご覧ください。",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "default": "",
+                        "description": "プラグインと合わせてロードされるプラグイン モジュールの一意の名前。"
+                    },
+                    "Type": {
+                        "enum": [
+                            "Runtime",
+                            "RuntimeNoCommandlet",
+                            "Developer",
+                            "Editor",
+                            "EditorNoCommandlet", 
+                            "Program"
+                        ],
+                        "type": "string",
+                        "default": "",
+                        "description": "モジュールのタイプを設定します。"
+                    },
+                    "LoadingPhase": {
+                        "enum": [
+                            "Default",
+                            "PreDefault",
+                            "PostConfigInit"
+                        ],
+                        "type": "string",
+                        "default": "",
+                        "description": "指定すると、起動時にプラグインをいつロードするかを制御します。これは通常は必要としない高度なオプションです。"
+                    }
+                },
+                "required": [
+                    "Name",
+                    "Type"
+                ]
+            }
+        }
+    },
+    "required": [
+        "FileVersion"
+    ]
+}
